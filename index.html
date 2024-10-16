@@ -6,21 +6,34 @@
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    
-        <!-- Facemesh model import -->
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh"></script>
-    
-        <!-- Our code goes in here -->
-        <script src="facemeshsetup.js"></script>
+        <script>
+            let millipas = 0;
+            function getacclr(){
+                const aclr = new Accelerometer();
+                aclr.addEventListener("reading", () => {
+                    document.getElementById("x-acclr").innerHTML = aclr.x;
+                    document.getElementById("y-acclr").innerHTML = aclr.y;
+                    document.getElementById("z-acclr").innerHTML = aclr.z;
+                });
+                aclr.start();
+                millipas = millipas + 1;
+                document.getElementById("millipast").innerHTML = millipas;
+                setTimeout(getacclr, 1);
+            }
+            const acl = new Accelerometer({ frequency: 60 });
+            acl.addEventListener("reading", () => {
+                console.log(`Acceleration along the X-axis ${acl.x}`);
+                console.log(`Acceleration along the Y-axis ${acl.y}`);
+                console.log(`Acceleration along the Z-axis ${acl.z}`);
+            });
+            acl.start();
+        </script>
     </head>
     <body>
-	    <!-- HTML Canvas we're drawing onto -->
-	    <canvas id="facecanvas"></canvas>
-  
-	    <!-- Video that handles the browser access to the camera. The transforms mirror the feed -->
-	    <video autoplay muted hidden playsinline id="video"  style="-webkit-transform: scaleX(-1);transform: scaleX(-1);width: auto;height: auto;">
-	    </video>
+        x-acclr:<div id="x-acclr">0</div>
+        y-acclr:<div id="y-acclr">0</div>
+        z-acclr:<div id="z-acclr">0</div>
+        millipas:<div id="millipast">0</div>
+        <button onclick="getacclr()">start</button>
     </body>
 </html>
