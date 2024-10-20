@@ -14,7 +14,9 @@
                 document.getElementById("x-acclr").innerHTML = acl.x;
                 document.getElementById("y-acclr").innerHTML = acl.y;
                 document.getElementById("z-acclr").innerHTML = acl.z;
-                document.getElementById("angle").innerHTML = 90 - 57.2957 * Math.acos(acl.z/(Math.sqrt(acl.x**2 + acl.y**2 + acl.z**2)));
+                var ang = 90 - Math.round(57.2957 * Math.acos(acl.z/(Math.sqrt(acl.x**2 + acl.y**2 + acl.z**2))));
+                document.getElementById("angle").innerHTML = ang;
+                document.getElementById("line-0").style.transform = "translate(-50%,"+(ang-29)+"px)";
                 millipas = millipas + 1;
                 document.getElementById("millipast").innerHTML = millipas;
             });
@@ -40,6 +42,18 @@
                 position: absolute;
                 top: 8px;
                 left: 16px;
+                background-color: black;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                opacity: 0.8;
+            }
+            .line-0{
+                position: absolute;
+                text-align: center;
+                left:50%;
+                top:50%;
+                transform: translate(-50%,-29px);
             }
         </style>
     </head>
@@ -48,7 +62,10 @@
 	        <canvas id="facecanvas"></canvas>
             <video autoplay muted hidden playsinline id="video"  style="width: auto;height: auto;">
             </video>
-            <div class="center" style="color: black;font-size: 50px;">+</div>
+            <div class="center" style="color: black;font-size: 50px;text-align: center;">
+                +
+                <hr class="line-0" id="line-0" width="300px" style="padding: 0;">
+            </div>
             <div class="info">
                 x-acclr:<div id="x-acclr">0</div>
                 y-acclr:<div id="y-acclr">0</div>
