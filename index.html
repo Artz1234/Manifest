@@ -18,7 +18,7 @@
                 document.getElementById("magn").innerHTML = Math.round(magn * 100) / 100;
                 var ang = 57.2957 * Math.acos(acl.z/magn) - 90;
                 document.getElementById("angle").innerHTML = Math.round(ang);
-                document.getElementById("line-0").style.transform = "translate(-50%,"+(Math.tan(ang/57.2957) * 70 - 29)+"px)";
+                document.getElementById("line-0").style.transform = "translate(-50%,"+(Math.tan(ang/57.2957) * 250 - 29)+"px)";
                 millipas = millipas + 1;
                 document.getElementById("millipast").innerHTML = millipas/10;
             });
