@@ -1,6 +1,6 @@
 {
-    "name":"Periodic Table",
-    "short_name":"Periodic Table",
+    "name":"Web manifest",
+    "short_name":"Web_m test",
     "icons":[
         {
             "src":"/android-chrome-192x192.png",
@@ -14,5 +14,5 @@
     ],
     "theme_color":"#000000",
     "background_color":"#ffffff",
-    "display":"standalone"
+    "display":"fullscreen"
 }
