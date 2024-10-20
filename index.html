@@ -6,6 +6,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <script src="facemeshsetup.js"></script>
         <script>
             let millipas = 0;
             const acl = new Accelerometer({ frequency: 60 });
@@ -21,11 +22,43 @@
             });
             acl.start();
         </script>
+        <style>
+            canvas{
+                width: 100%;
+                margin: 0;
+                height: 100%;
+                border: 0;
+                padding: 0;}
+            .container{
+                position: relative;
+            }
+            .center{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .info{
+                position: absolute;
+                top: 8px;
+                left: 16px;
+            }
+        </style>
     </head>
-    <body>
-        x-acclr:<div id="x-acclr">0</div>
-        y-acclr:<div id="y-acclr">0</div>
-        z-acclr:<div id="z-acclr">0</div>
-        millipas:<div id="millipast">0</div>
-    </body>
+    <body style="padding: 0; margin: 0; border: 0;">
+	    <div class="container">
+	        <canvas id="facecanvas"></canvas>
+            <video autoplay muted hidden playsinline id="video"  style="-webkit-transform: scaleX(-1);transform: scaleX(-1);width: auto;height: auto;">
+            </video>
+            <div class="center" style="color: black;font-size: 50px;">+</div>
+            <div class="info">
+                x-acclr:<div id="x-acclr">0</div>
+                y-acclr:<div id="y-acclr">0</div>
+                z-acclr:<div id="z-acclr">0</div>
+                millipas:<div id="millipast">0</div>
+            </div>
+        </div>
+	    <!-- Video that handles the browser access to the camera. The transforms mirror the feed -->
+
+</body>
 </html>
