@@ -14,7 +14,7 @@
                 document.getElementById("x-acclr").innerHTML = acl.x;
                 document.getElementById("y-acclr").innerHTML = acl.y;
                 document.getElementById("z-acclr").innerHTML = acl.z;
-                document.getElementById("angle").innerHTML = Math.acos(acl.y/(Math.sqrt(acl.x^2 + acl.y^2 + acl.z^2)));
+                document.getElementById("angle").innerHTML = Math.acos(acl.y/(Math.sqrt(acl.x**2 + acl.y**2 + acl.z**2)));
                 millipas = millipas + 1;
                 document.getElementById("millipast").innerHTML = millipas;
             });
