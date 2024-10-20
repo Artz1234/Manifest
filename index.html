@@ -14,9 +14,7 @@
                 document.getElementById("x-acclr").innerHTML = acl.x;
                 document.getElementById("y-acclr").innerHTML = acl.y;
                 document.getElementById("z-acclr").innerHTML = acl.z;
-                console.log(`Acceleration along the X-axis ${acl.x}`);
-                console.log(`Acceleration along the Y-axis ${acl.y}`);
-                console.log(`Acceleration along the Z-axis ${acl.z}`);
+                document.getElementById("angle").innerHTML = Math.acos(acl.y/(Math.sqrt(acl.x^2 + acl.y^2 + acl.z^2)));
                 millipas = millipas + 1;
                 document.getElementById("millipast").innerHTML = millipas;
             });
@@ -45,20 +43,19 @@
             }
         </style>
     </head>
-    <body style="padding: 0; margin: 0; border: 0;">
+    <body style="padding: 0; margin: 0; border: 0; user-select: none;">
 	    <div class="container">
 	        <canvas id="facecanvas"></canvas>
-            <video autoplay muted hidden playsinline id="video"  style="-webkit-transform: scaleX(-1);transform: scaleX(-1);width: auto;height: auto;">
+            <video autoplay muted hidden playsinline id="video"  style="width: auto;height: auto;">
             </video>
             <div class="center" style="color: black;font-size: 50px;">+</div>
             <div class="info">
                 x-acclr:<div id="x-acclr">0</div>
                 y-acclr:<div id="y-acclr">0</div>
                 z-acclr:<div id="z-acclr">0</div>
+                angle:<div id="angle">0</div>
                 millipas:<div id="millipast">0</div>
             </div>
         </div>
-	    <!-- Video that handles the browser access to the camera. The transforms mirror the feed -->
-
 </body>
 </html>
