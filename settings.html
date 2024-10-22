@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            function sedeb(){
+                var checkBox = document.getElementById("debcheckbox");
+                if (checkBox.checked == true){
+                    localStorage.removeItem("deb-mode");
+                    localStorage.setItem("deb-mode","yes");
+                }
+                else{
+                    localStorage.removeItem("deb-mode");
+                    localStorage.setItem("deb-mode","no");
+                }
+            } 
+            function onload(){
+                var deb=localStorage.getItem("deb-mode");
+                var checkBox = document.getElementById("debcheckbox");    
+                if(deb=="yes"){
+                    checkBox.click();
+                }          
+            }
+            function saveToLocalStorage() {
+                const inputValue = document.getElementById('myInput').value;
+                localStorage.setItem('Angle', inputValue);
+            }
+        </script>
+    </head>
+    <body onload="onload()">
+        <h2>Settings</h2>
+        <input type="checkbox" id="debcheckbox" onclick="sedeb()">Show additional debug items<br/>
+        <input type="text" id="myInput" placeholder="Angle">
+        <button onclick="saveToLocalStorage()">Save</button>
+    </body>

@@ -8,9 +8,16 @@
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
         <script src="facemeshsetup.js"></script>
         <script>
+            function onload(){
+                var deb=localStorage.getItem("deb-mode");
+                if(deb=="yes"){
+                    document.getElementById("hide").removeAttribute("hidden");
+                }
+            }
             let millipas = 0;
             const acl = new Accelerometer({ frequency: 10 });
             acl.addEventListener("reading", () => {
+                const angle = Number(localStorage.getItem('Angle'));
                 document.getElementById("x-acclr").innerHTML = Math.round(acl.x * 10) / 10;
                 document.getElementById("y-acclr").innerHTML = Math.round(acl.y * 10) / 10;
                 document.getElementById("z-acclr").innerHTML = Math.round(acl.z * 10) / 10;
@@ -18,7 +25,8 @@
                 document.getElementById("magn").innerHTML = Math.round(magn * 100) / 100;
                 var ang = 57.2957 * Math.acos(acl.z/magn) - 90;
                 document.getElementById("angle").innerHTML = Math.round(ang);
-                document.getElementById("line-0").style.transform = "translate(-50%,"+(Math.tan(ang/57.2957) * 250 - 29)+"px)";
+                document.getElementById("line-0").style.transform = "translate(-50%,"+(Math.tan(ang/57.2957) * 70 - 29)+"px)";
+                document.getElementById("line-1").style.transform = "translate(-50%,"+(Math.tan((ang-angle)/57.2957) * 70 - 29)+"px)";
                 millipas = millipas + 1;
                 document.getElementById("millipast").innerHTML = millipas/10;
             });
@@ -56,10 +64,22 @@
                 left:50%;
                 top:50%;
                 transform: translate(-50%,-29px);
+            }           
+            .line-1{
+                position: absolute;
+                text-align: center;
+                left:50%;
+                top:50%;
+                transform: translate(-50%,-29px);
+            }           
+            .bottom-left {
+                position: absolute;
+                bottom: 8px;
+                left: 16px;
             }
         </style>
     </head>
-    <body style="padding: 0; margin: 0; border: 0; user-select: none;">
+    <body style="padding: 0; margin: 0; border: 0; user-select: none;" onload="onload()">
 	    <div class="container">
 	        <canvas id="facecanvas"></canvas>
             <video autoplay muted hidden playsinline id="video"  style="width: auto;height: auto;">
@@ -67,14 +87,20 @@
             <div class="center" style="color: black;font-size: 50px;text-align: center;">
                 +
                 <hr class="line-0" id="line-0" width="300px" style="padding: 0;">
+                <hr class="line-1" id="line-1" width="250px" style="padding: 0;">
             </div>
             <div class="info">
-                x-acclr:<div id="x-acclr">0</div>
-                y-acclr:<div id="y-acclr">0</div>
-                z-acclr:<div id="z-acclr">0</div>
-                magnitude:<div id="magn">9.8</div>
                 angle:<div id="angle">0</div>
-                millipas:<div id="millipast">0</div>
+                    <div id="hide" hidden>
+                    x-acclr:<div id="x-acclr">0</div>
+                    y-acclr:<div id="y-acclr">0</div>
+                    z-acclr:<div id="z-acclr">0</div>
+                    magnitude:<div id="magn">9.8</div>
+                    millipas:<div id="millipast">0</div>
+                </div>
+            </div>
+            <div class="bottom-left">
+                <a href="settings.html">settings</a>
             </div>
         </div>
 </body>
