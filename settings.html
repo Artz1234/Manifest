@@ -23,7 +23,8 @@
             function saveToLocalStorage() {
                 const inputValue = document.getElementById('myInput').value;
                 localStorage.setItem('Angle', inputValue);
-                alert("Angle saved as"+inputValue)
+                alert("Angle saved as"+inputValue);
+                showNotification("title");
             }
         </script>
     </head>
